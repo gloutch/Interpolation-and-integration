@@ -17,7 +17,7 @@ def Test_integration():
     print("===> Integration test <===")
     print("f(x) = x**3 on ["+str(a)+", "+str(b)+"]")
     trap = test_integ(trapeze, f, a, b)
-    print("Trapze method : "+str(trap))
+    print("Trapeze method : "+str(trap))
     mid_p = test_integ(middle_point, f, a, b)
     print("Middle point method : "+str(mid_p))
     sim = test_integ(simpson, f, a, b)

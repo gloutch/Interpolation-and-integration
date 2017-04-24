@@ -34,7 +34,7 @@ def load_foil(file):
     iy = np.array([float(intra[i][1]) for i in range(li)])
     return(ex,ey,ix,iy)
 
-(ex,ey,ix,iy) = load_foil("C:\\Users\\Elfen\\Desktop\\Algonum5\\boe103.txt")
+(ex,ey,ix,iy) = load_foil("boe103.txt")
 
 #ex =  np.fromiter(ex, dtype=np.int)
 print(ex)
