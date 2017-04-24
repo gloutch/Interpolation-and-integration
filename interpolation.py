@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 # Compute and obtain second derivative on each point of the set
 # Taken from Numerical recipes
-def spline(x, y, yp1, ypn, max = 99e30):
+def spline(x, y, yp1, ypn, max = .99e30):
     n = len(x)-1
     u = np.zeros(n)
     y2 = np.zeros(n+1)
@@ -37,3 +37,26 @@ def spline(x, y, yp1, ypn, max = 99e30):
         y2[k] = y2[k] * y2[k+1] + u[k]
     
     return y2
+
+# Calculate the cubic-spline interpolated value of a given x
+# Taken from Numerical recipes
+def splint(xa, ya, y2a, n, x):
+    klo = 0
+    khi = n-1
+    while (khi-klo > 1) :
+        k=(khi+klo) / 2.
+        if(xa[k] > x):
+            khi = k
+        else:
+            klo = k
+
+    h = xa[khi] - xa[klo]
+
+    if(h == 0.):
+        raise Exception("Error", "bad xa input in splint")
+
+    a = (xa[khi] - x) / h
+    b = (x - xa[klo]) / h
+    y = a * ya[klo] + b * ya[khi] + ((a**3 - a) * y2a[klo] + (b**3 - b) * y2a[khi]) * (h**2) / 6.
+
+    return y
