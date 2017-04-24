@@ -44,7 +44,7 @@ def splint(xa, ya, y2a, n, x):
     klo = 0
     khi = n-1
     while (khi-klo > 1) :
-        k=(khi+klo) / 2.
+        k = (khi+klo) / 2.
         if(xa[k] > x):
             khi = k
         else:
