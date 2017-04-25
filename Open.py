@@ -33,11 +33,3 @@ def load_foil(file):
     ix = np.array([float(intra[i][0]) for i in range(li)])
     iy = np.array([float(intra[i][1]) for i in range(li)])
     return(ex,ey,ix,iy)
-
-(ex,ey,ix,iy) = load_foil("boe103.txt")
-
-#ex =  np.fromiter(ex, dtype=np.int)
-print(ex)
-print(ey)
-print(ix)
-print(iy)
