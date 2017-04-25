@@ -3,6 +3,7 @@
 
 import numpy as np
 
+
 # collection of method for approximation
 def trapeze(f, a, b):
     return f(a) + f(b)
@@ -57,4 +58,5 @@ def derivative(f, a, b, n):
     print(y)
     return f
 
+# to check syntaxe
 derivative(lambda x: x * x, 0, 1, 5)
