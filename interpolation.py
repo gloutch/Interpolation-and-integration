@@ -6,7 +6,8 @@ import matplotlib.pyplot as plt
 
 # Compute and obtain second derivative on each point of the set
 # Taken from Numerical recipes
-def spline(x, y, yp1, ypn, max = .99e30):
+def spline(x, y, yp1, ypn):
+    max = .99e30
     n = len(x)-1
     u = np.zeros(n)
     y2 = np.zeros(n+1)
@@ -44,7 +45,7 @@ def splint(xa, ya, y2a, n, x):
     klo = 0
     khi = n-1
     while (khi-klo > 1) :
-        k = (khi+klo) / 2.
+        k=int((khi+klo) / 2)
         if(xa[k] > x):
             khi = k
         else:
@@ -60,3 +61,21 @@ def splint(xa, ya, y2a, n, x):
     y = a * ya[klo] + b * ya[khi] + ((a**3 - a) * y2a[klo] + (b**3 - b) * y2a[khi]) * (h**2) / 6.
 
     return y
+
+
+def apply_spline(xa, ya, nbpoints):
+    n = len(xa)
+    yp1 = 1e30
+    ypn = 1e30
+    index = (xa[n-1] / n) / nbpoints
+    total_points = nbpoints * n + 1
+    
+    sol_x = []
+    sol_y = []
+    
+    for i in range(0, total_points):
+        sol_x.append(index*i)
+        sol_y.append(splint(xa, ya, spline(xa, ya, yp1, ypn), len(xa), index*i))
+    
+    return (sol_x, sol_y)
+
