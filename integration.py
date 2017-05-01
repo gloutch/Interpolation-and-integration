@@ -47,8 +47,8 @@ def derivative(f, a, b, n):
     xi = a
     
     for i in range(n):
-        x[i] = (f(xi + h) - f(xi - h)) / h2
-        y[i] = xi
+        y[i] = (f(xi + h) - f(xi - h)) / h2
+        x[i] = xi
 
         xi = xi + step
 
@@ -60,3 +60,9 @@ def derivative(f, a, b, n):
 
 # to check syntaxe
 derivative(lambda x: x * x, 0, 1, 5)
+
+# no tested function
+def length_of_plane_curves(f, a, b, n, method):
+    df = derivative(f, a, b, n)
+    g = lambda x: sqrt(1+df(x)**2)
+    return intregrate(g, a, b, n, method)
