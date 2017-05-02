@@ -1,3 +1,6 @@
+import sys
+sys.path.append('C:\\Users\\Elfen\\Desktop\\Algonum5\\Interpolation-and-integration')
+
 import numpy as np;
 import re; # regexp
 import matplotlib.pyplot as ma;
