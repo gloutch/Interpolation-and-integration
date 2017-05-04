@@ -1,3 +1,6 @@
+import sys
+sys.path.append('C:\\Users\\Elfen\\Desktop\\Algonum5\\Interpolation-and-integration')
+
 ## Integration tests ##
 # coding: utf-8
 import matplotlib.pyplot as plt
@@ -13,14 +16,13 @@ phi3 = lambda x: x * x + x + 1
 sin = math.sin
 f = lambda x: x * math.sin(x + x) + 1
 
-
 def test_methode():
-    a = 0
-    b = 1
     print("################")
     print("#    Method    #")
     print("################")
     print("===> Method test <===")
+    a = 0
+    b = 1
     print("f(x) = x**3 on ["+str(a)+", "+str(b)+"]")
     trap = trapeze(X3, a, b)
     print("Trapeze method : "+str(trap))
@@ -33,13 +35,13 @@ test_methode()
 
 
 def test_integrate():
-    a = 0
-    b = 4
-    n = 100
     print("###################")
     print("#    Integrate    #")
     print("###################")
     print("===> Integrate test <===")
+    a = 0
+    b = 4
+    n = 100
     print("f(x) = x**3 on ["+str(a)+", "+str(b)+"] with "+str(n)+" subdivisions, that gives 64")
     trap = integrate(X3, a, b, n, trapeze)
     print("Trapeze method : "+str(trap))
@@ -51,13 +53,13 @@ def test_integrate():
 test_integrate()
 
 def test_derivative():
-    a = 0
-    b = 4
-    n = 100
     print("###################")
     print("#    Derivate     #")
     print("###################")
     print("===> Derivate test <===")
+    a = 0
+    b = 4
+    n = 100
     fig = plt.figure()
     x = [a+i*(b-a)/n for i in range(n+1)]
 
@@ -98,13 +100,13 @@ def test_derivative():
 test_derivative()
 
 def test_length_curves():
-    a = 0
-    b = 10
-    n = 100
     print("###################")
     print("#      Length     #")
     print("###################")
     print("===> Length of plane curves test <===")
+    a = 0
+    b = 10
+    n = 100
     t1 = time()
     trap = length_of_plane_curves(X3, a, b, n, trapeze)
     t_trap = time() - t1

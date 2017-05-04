@@ -1,6 +1,3 @@
-import sys
-sys.path.append('C:\\Users\\Elfen\\Desktop\\Algonum5\\Interpolation-and-integration')
-
 ## Interpolate couple of position describing position on the upper and lower surface of an airplane wing ##
 # coding: utf-8
 
@@ -65,7 +62,14 @@ def splint(xa, ya, y2a, n, x):
 
     return y
 
-
+# Calculate the interpolation of the airfoil
+def apply_spline(xa, ya):
+    n = len(xa)
+    yp1 = 1e30
+    ypn = 1e30    
+    return lambda x : splint(xa, ya, spline(xa, ya, yp1, ypn), len(xa), x)
+    
+"""
 def apply_spline(xa, ya, nbpoints):
     n = len(xa)
     yp1 = 1e30
@@ -81,11 +85,4 @@ def apply_spline(xa, ya, nbpoints):
         sol_y.append(splint(xa, ya, spline(xa, ya, yp1, ypn), len(xa), index*i))
     
     return (sol_x, sol_y)
-    
-def apply_spline_lambda(xa, ya):
-    n = len(xa)
-    yp1 = 1e30
-    ypn = 1e30    
-    f = lambda x : splint(xa, ya, spline(xa, ya, yp1, ypn), len(xa), x)
-    return f
-
+"""
