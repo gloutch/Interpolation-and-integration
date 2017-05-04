@@ -1,7 +1,9 @@
 ## Computing the length of plane curves ##
 # coding: utf-8
 
+from math import sqrt
 import numpy as np
+from interpolation import apply_spline_lambda
 
 
 # collection of method for approximation
@@ -52,11 +54,7 @@ def derivative(f, a, b, n):
 
         xi = xi + step
 
-    # return interpation(x, y)
-    # for now
-    print(x)
-    print(y)
-    return f
+    return apply_spline_lambda(x, y)
 
 # to check syntaxe
 derivative(lambda x: x * x, 0, 1, 5)
@@ -65,4 +63,5 @@ derivative(lambda x: x * x, 0, 1, 5)
 def length_of_plane_curves(f, a, b, n, method):
     df = derivative(f, a, b, n)
     g = lambda x: sqrt(1+df(x)**2)
-    return intregrate(g, a, b, n, method)
+    return integrate(g, a, b, n, method)
+
