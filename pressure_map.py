@@ -54,15 +54,3 @@ def pressure_to_speed(file, epsilon):
     #im = plt.gaussian_filter(im, sigma=(14), order=0)
     fig.colorbar(im)
     plt.show()
-
-
-"""
-# Links pressure with air speed
-def pressure_to_speed(flows_array, function):
-    
-    pressure_speed = []
-    for i in range(0, len(flows_array)):
-        pressure_speed.append(length_of_plane_curves(function, flows_array[i][0], flows_array[i][1], len(flows_array), simpson))
-        
-    return pressure_speed
-"""
