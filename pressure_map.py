@@ -29,16 +29,13 @@ def pressure_to_speed(file, epsilon):
     pressure_speed_intrados = []
     
     le = len(flow_extrados)
-    li = len(flow_intrados)
     for i in range(0, le):
         pressure_speed_extrados.append(length_of_plane_curves(flow_extrados[i], ex[0], ex[len(ex)-1], nbpoints, simpson))
+    li = len(flow_intrados)
     for i in range(0, li):
         pressure_speed_intrados.append(length_of_plane_curves(flow_intrados[i], ix[0], ix[len(ix)-1], nbpoints, simpson))
-    
-    M = np.zeros((nbpoints, nbpoints))
-    for i in range(nbpoints):
-        for j in range(nbpoints):
-            M[i][j] = 1.0
+
+    M = np.ones((nbpoints, nbpoints))
           
     for i in range(le):
         for j in range(nbpoints):
@@ -51,6 +48,5 @@ def pressure_to_speed(file, epsilon):
     fig = plt.figure(5)
     ax = plt.subplot(111)
     im = ax.imshow(M, cmap=plt.get_cmap('hot'), interpolation='gaussian')#'nearest')
-    #im = plt.gaussian_filter(im, sigma=(14), order=0)
     fig.colorbar(im)
     plt.show()
