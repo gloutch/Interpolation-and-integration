@@ -4,6 +4,8 @@
 from math import sqrt
 import numpy as np
 from interpolation import *
+from scipy.special import legendre
+from scipy.special import roots_legendre
 
 # collection of method for approximation
 def trapeze(f, a, b):
@@ -14,6 +16,19 @@ def middle_point(f, a, b):
 
 def simpson(f, a, b):
     return f(a)/3. + 4 * f((a + b) / 2.)/3. + f(b)/3.
+
+def gauss(f, a=-1, b=1, eps=0.1):
+    gauss, s, r = eps, 0, 0
+    while (abs(gauss-s) > eps):
+        gauss = s
+        s = 0
+        r += 1
+        roots = roots_legendre(r)
+        dPr = legendre(r, [a, b]).deriv()
+        for i in range(len(roots)):
+            w = 2./((1-roots[i]**2)*(dPr(roots[i])**2))
+            s += w * f(roots[i])
+    return s
 
 # compute the integral of f on [a, b] using
 # nb_sub subdivision and with method approximation
