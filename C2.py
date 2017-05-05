@@ -38,7 +38,4 @@ def test_deriv_2(f,a,b):
 #il reste la continuite de la derivee
 
 def test_c_2(f,a,b):
-    if test_deriv_1(f,a,b) and test_deriv_2(f,a,b) and test_cont(f,a,b):
-        return 1
-    else:
-        return 0
+    return test_deriv_1(f,a,b) and test_deriv_2(f,a,b) and test_cont(f,a,b)
