@@ -29,12 +29,13 @@ def pressure_to_speed(file, epsilon):
     pressure_speed_intrados = []
     
     le = len(flow_extrados)
-    li = len(flow_intrados)
     for i in range(0, le):
         pressure_speed_extrados.append(length_of_plane_curves(flow_extrados[i], ex[0], ex[len(ex)-1], nbpoints, simpson))
+    li = len(flow_intrados)
     for i in range(0, li):
         pressure_speed_intrados.append(length_of_plane_curves(flow_intrados[i], ix[0], ix[len(ix)-1], nbpoints, simpson))
     
+    # np.ones?
     M = np.zeros((nbpoints, nbpoints))
     for i in range(nbpoints):
         for j in range(nbpoints):
