@@ -34,7 +34,7 @@ def test_deriv_2(f,a,b):
     eps = 1e-17
     X = np.linspace(a+eps,b-eps,(b-a)*10)
     for x in X:
-        if abs(derivative(f,x-eps,0.01,2) - derivative(f,x+eps,0.01,2)) >0.01:
+        if abs(derivative(f,x-eps,0.01,2) - derivative(f,x+eps,0.01,2)) > 0.01:
             return 0,x
         if abs(derivative(f,x,0.01,2) - derivative(f,x+eps,0.01,2)) > 0.01:
             return 0,x
