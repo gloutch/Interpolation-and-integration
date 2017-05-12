@@ -1,5 +1,5 @@
 import sys
-sys.path.append('C:\\Users\\Elfen\\Desktop\\Algonum5\\Interpolation-and-integration')
+# sys.path.append('C:\\Users\\Elfen\\Desktop\\Algonum5\\Interpolation-and-integration')
 
 ## Interpolation tests ##
 # coding: utf-8
@@ -14,12 +14,12 @@ def display_interpolation(file):
     print("===> Interpolation test for ", file, " <===")
     (ex,ey,ix,iy) = load_foil(file)
     
-    plt.figure(1)
-    plt.subplot(121)
-    plt.plot([0, 1], [0, 0], color='black')
-    plt.plot(ex, ey, "b-o")
-    plt.plot(ix, iy, "b-o")
-    plt.title("Original points of " + file)
+    # plt.figure(1)
+    # plt.subplot(121)
+    # plt.plot([0, 1], [0, 0], color='black')
+    # plt.plot(ex, ey, "b")
+    # plt.plot(ix, iy, "b")
+    # plt.title("Original points of " + file)
 
     nbpoints = 300
     
@@ -37,13 +37,24 @@ def display_interpolation(file):
     for i in range(nbpoints):
         y2.append(intrados(x2[i]))
         
-    plt.subplot(122)
+    # plt.subplot(122)
     plt.plot([0, 1], [0, 0], color='black')
+
+	
+    # original shape
+    plt.plot(ex, ey, "b")
+    plt.plot(ix, iy, "b") 
+
+    # interpolaton
     plt.plot(x1, y1, "r")
     plt.plot(x2, y2, "r")
+
     plt.title("Interpolated points of " + file)
     plt.show()
     
-#file = "boe103.txt"
-file = "C:\\Users\\Elfen\\Desktop\\Algonum5\\Interpolation-and-integration\\boe103.txt"
-display_interpolation(file)
+file1 = "model/boe103.txt"
+file2 = "model/HOR20.txt"
+file3 = "model/DU84132V.txt"
+
+#file1 = "C:\\Users\\Elfen\\Desktop\\Algonum5\\Interpolation-and-integration\\model\\boe103.txt"
+display_interpolation(file3)
