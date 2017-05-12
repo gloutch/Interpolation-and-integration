@@ -4,8 +4,7 @@
 from math import sqrt
 import numpy as np
 from interpolation import *
-from numpy.polynomial import Legendre
-#from scipy.special import *
+from scipy.special import legendre
 
 # collection of method for approximation
 def trapeze(f, a, b):
@@ -17,19 +16,20 @@ def middle_point(f, a, b):
 def simpson(f, a, b):
     return f(a)/3. + 4 * f((a + b) / 2.)/3. + f(b)/3.
 
-def gauss(f, a=-1, b=1, eps=0.1):
-    gauss, s, r = eps+1, 0, 0
-    while (abs(gauss-s) > eps):
+def gauss(f, a=-1, b=1, eps=1e-8):
+    gauss, s, r = 0, 0, 0
+    while True:
         gauss = s
         s = 0
         r += 1
-        Pr = Legendre(r, [a, b])
-        roots = Legendre.roots(Pr)
+        Pr = legendre(r)
+        roots = Pr.r
         dPr = Pr.deriv()
         for i in range(len(roots)):
             w = 2./((1-roots[i]**2)*(dPr(roots[i])**2))
             s += w * f(roots[i])
-    return s
+        if abs(gauss-s) < eps:
+            return s
 
 def romberg(f, a=-1, b=1, eps=1e-8):
     tmp = [[0.5 * (b - a) * (f(a) + f(b))]] 
