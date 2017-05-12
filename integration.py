@@ -4,8 +4,8 @@
 from math import sqrt
 import numpy as np
 from interpolation import *
-from scipy.special import legendre
-from scipy.special import roots_legendre
+#from scipy.special import legendre
+#from scipy.special import roots_legendre
 
 # collection of method for approximation
 def trapeze(f, a, b):
