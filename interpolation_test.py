@@ -38,14 +38,14 @@ def display_interpolation(file):
         
 
     plt.plot([0, 1], [0, 0], color='black')
-	
-    # original shape
-    plt.plot(ex, ey, "b")
-    plt.plot(ix, iy, "b") 
 
     # interpolaton
     plt.plot(x1, y1, "r")
     plt.plot(x2, y2, "r")
+    
+    # original shape
+    plt.plot(ex, ey, "b--")
+    plt.plot(ix, iy, "b--") 
 
     plt.title("Interpolated points of " + file)
     plt.show()

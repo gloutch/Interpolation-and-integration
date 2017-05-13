@@ -1,5 +1,5 @@
-import sys
-sys.path.append('C:\\Users\\Elfen\\Desktop\\Algonum5\\Interpolation-and-integration')
+#import sys
+#sys.path.append('C:\\Users\\Elfen\\Desktop\\Algonum5\\Interpolation-and-integration')
 
 ## Pressure map modeled ##
 # coding: utf-8
