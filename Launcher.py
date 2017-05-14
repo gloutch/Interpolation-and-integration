@@ -1,6 +1,5 @@
 import tkinter
 from tkinter import *
-from tkinter.messagebox import*
 
 from interpolation_test import *
 from airflow_test import *
@@ -36,12 +35,6 @@ fen.title("Launcher")
 can=Canvas(fen, width=500, height=300, bg="white")
 can.pack()
 can.propagate(0)
-
-sysdemenu=tkinter.Menu(fen)
-menu1=tkinter.Menu(sysdemenu,tearoff=0)
-sysdemenu.add_cascade(label="File",menu=menu1)
-menu1.add_command(label="Exit",activebackground="red",font="Harrington 10",command=callback)
-fen.config(menu=sysdemenu)
 
 FILES = [
     ("boe103", "model/boe103.txt"),
