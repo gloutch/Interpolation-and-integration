@@ -20,16 +20,16 @@ def test_methode():
     print("===> Method test <===")
     a = -1
     b = 1
-    print("f(x) = x**2+x+1 on ["+str(a)+", "+str(b)+"]")
-    trap = trapeze(phi3, a, b)
+    print("f(x) = x*sin(2x)+1 on ["+str(a)+", "+str(b)+"]")
+    trap = trapeze(f, a, b)
     print("Trapeze method : "+str(trap))
-    mid_p = middle_point(phi3, a, b)
+    mid_p = middle_point(f, a, b)
     print("Middle point method : "+str(mid_p))
-    sim = simpson(phi3, a, b)
+    sim = simpson(f, a, b)
     print("Simpson method : "+str(sim))
-    gaus = gauss(phi3, a, b)
+    gaus = gauss(f, a, b)
     print("Gauss method : "+str(gaus))
-    romb = romberg(phi3, a, b)
+    romb = romberg(f, a, b)
     print("Romberg method : "+str(romb))
     print()
 test_methode()
@@ -113,23 +113,23 @@ def test_length_curves():
     b = 10
     n = 100
     t1 = time()
-    trap = length_of_plane_curves(X3, a, b, n, trapeze)
+    trap = length_of_plane_curves(f, a, b, n, trapeze)
     t_trap = time() - t1
     print("Trapeze method : "+str(trap)+" in "+str(t_trap)+" seconds")
     t2 = time()
-    mid_p = length_of_plane_curves(X3, a, b, n, middle_point)
+    mid_p = length_of_plane_curves(f, a, b, n, middle_point)
     t_mid = time() - t2
     print("Middle point method : "+str(mid_p)+" in "+str(t_mid)+" seconds")
     t3 = time()
-    sim = length_of_plane_curves(X3, a, b, n, simpson)
+    sim = length_of_plane_curves(f, a, b, n, simpson)
     t_sim = time() - t3
     print("Simpson method : "+str(sim)+" in "+str(t_sim)+" seconds")
     t4 = time()
-    gaus = length_of_plane_curves(X3, a, b, n, gauss)
+    gaus = length_of_plane_curves(f, a, b, n, gauss)
     t_gaus = time() - t4
     print("Gauss method : "+str(gaus)+" in "+str(t_gaus)+" seconds")
     t5 = time()
-    romb = length_of_plane_curves(X3, a, b, n, romberg)
+    romb = length_of_plane_curves(f, a, b, n, romberg)
     t_romb = time() - t5
     print("Romberg method : "+str(romb)+" in "+str(t_romb)+" seconds")
     print()
@@ -154,11 +154,11 @@ def compare_integrate():
     global f
     fig = plt.figure()
 
-    f = X3
+    #f = f
     a = 0.
     b = 4.
     sub = range(9, 80, 2)
-    expect = 64
+    expect = 4.538339629
 
     ax1 = fig.add_subplot(211)
     ax2 = fig.add_subplot(212)
@@ -184,12 +184,12 @@ def compare_integrate():
     ax1.plot(sub, speed, c, label="simpson method")
     ax2.plot(sub, accuracy, c, label="simpson method")
     
-    c = "o"
+    c = "c"
     speed, accuracy = speed_and_accuracy(f, a, b, gauss, sub, expect)
     ax1.plot(sub, speed, c, label="gauss method")
     ax2.plot(sub, accuracy, c, label="gauss method")
     
-    c = "v"
+    c = "k"
     speed, accuracy = speed_and_accuracy(f, a, b, romberg, sub, expect)
     ax1.plot(sub, speed, c, label="romberg method")
     ax2.plot(sub, accuracy, c, label="romberg method")
