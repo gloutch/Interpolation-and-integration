@@ -9,7 +9,8 @@ import numpy as np
 # Adapted in our situation, where function's ends are like a line
 def spline(x, y):
     n = len(x)
-    u = np.zeros(n)
+    
+    u = np.empty(n)
     y2 = np.empty(n)
     
     y2[0] = 0.
@@ -19,12 +20,10 @@ def spline(x, y):
         sig = (x[i] - x[i-1]) / (x[i+1] - x[i-1])
         p = sig * y2[i-1] + 2.
         y2[i] = (sig - 1.) / p
-        u[i] = (6. * ((y[i+1] - y[i]) / (x[i+1] - x[i]) - (y[i] - y[i-1]) / (x[i] - x[i-1])) / (x[i+1] - x[i-1]) - sig*u[i-1]) / p
-    
-    qn = 0.
-    un = 0.
+        u[i] = (y[i+1] - y[i])/(x[i+1] - x[i]) - (y[i] - y[i-1])/(x[i] - x[i-1])
+        u[i] = (6. * u[i] / (x[i+1] - x[i-1]) - sig * u[i - 1]) / p
 
-    y2[n-1] = (un - qn * u[n-1]) / (qn * y2[n-2] + 1.)
+    y2[n-1] = 0.
     
     for k in range(n-2, -1, -1):
         y2[k] = y2[k] * y2[k+1] + u[k]
