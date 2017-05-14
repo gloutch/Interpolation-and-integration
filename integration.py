@@ -4,7 +4,7 @@
 from math import sqrt
 import numpy as np
 from interpolation import *
-# from scipy.special import legendre
+from scipy.special import legendre
 
 
 # collection of method for approximation

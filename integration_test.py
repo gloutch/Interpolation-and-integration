@@ -1,6 +1,3 @@
-import sys
-sys.path.append('C:\\Users\\Elfen\\Desktop\\Algonum5\\Interpolation-and-integration')
-
 ## Integration tests ##
 # coding: utf-8
 import matplotlib.pyplot as plt
@@ -21,19 +18,19 @@ def test_methode():
     print("#    Method    #")
     print("################")
     print("===> Method test <===")
-    a = 0
+    a = -1
     b = 1
-    print("f(x) = x**3 on ["+str(a)+", "+str(b)+"]")
-    trap = trapeze(X3, a, b)
+    print("f(x) = x**2+x+1 on ["+str(a)+", "+str(b)+"]")
+    trap = trapeze(phi3, a, b)
     print("Trapeze method : "+str(trap))
-    mid_p = middle_point(X3, a, b)
+    mid_p = middle_point(phi3, a, b)
     print("Middle point method : "+str(mid_p))
-    sim = simpson(X3, a, b)
+    sim = simpson(phi3, a, b)
     print("Simpson method : "+str(sim))
-    # gaus = gauss(X3, a, b)
-    # print("Gauss method : "+str(gaus))
-    # romb = romberg(X3, a, b)
-    # print("Romberg method : "+str(romb))
+    gaus = gauss(phi3, a, b)
+    print("Gauss method : "+str(gaus))
+    romb = romberg(phi3, a, b)
+    print("Romberg method : "+str(romb))
     print()
 test_methode()
 
@@ -53,10 +50,10 @@ def test_integrate():
     print("Middle point method : "+str(mid_p))
     sim = integrate(X3, a, b, n, simpson)
     print("Simpson method : "+str(sim))
-    # gaus = integrate(X3, a, b, n, gauss)
-    # print("Gauss method : "+str(gaus))
-    # romb = integrate(X3, a, b, n, romberg)
-    # print("Romberg method : "+str(romb))
+    gaus = integrate(X3, a, b, n, gauss)
+    print("Gauss method : "+str(gaus))
+    romb = integrate(X3, a, b, n, romberg)
+    print("Romberg method : "+str(romb))
     print()
 test_integrate()
 
@@ -127,14 +124,14 @@ def test_length_curves():
     sim = length_of_plane_curves(X3, a, b, n, simpson)
     t_sim = time() - t3
     print("Simpson method : "+str(sim)+" in "+str(t_sim)+" seconds")
-    # t4 = time()
-    # gaus = length_of_plane_curves(X3, a, b, n, gauss)
-    # t_gaus = time() - t4
-    # print("Gauss method : "+str(gaus)+" in "+str(t_gaus)+" seconds")
-    # t5 = time()
-    # romb = length_of_plane_curves(X3, a, b, n, romberg)
-    # t_romb = time() - t5
-    # print("Romberg method : "+str(romb)+" in "+str(t_romb)+" seconds")
+    t4 = time()
+    gaus = length_of_plane_curves(X3, a, b, n, gauss)
+    t_gaus = time() - t4
+    print("Gauss method : "+str(gaus)+" in "+str(t_gaus)+" seconds")
+    t5 = time()
+    romb = length_of_plane_curves(X3, a, b, n, romberg)
+    t_romb = time() - t5
+    print("Romberg method : "+str(romb)+" in "+str(t_romb)+" seconds")
     print()
 test_length_curves()
     
@@ -166,7 +163,11 @@ def compare_integrate():
     ax1 = fig.add_subplot(211)
     ax2 = fig.add_subplot(212)
     ax1.set_ylabel("Execution time")
+    ax1.set_xlabel("Iterations")
+    ax1.set_yscale('log')
     ax2.set_ylabel("Relative error")
+    ax2.set_xlabel("Iterations")
+    ax2.set_yscale('log')
 
     c = "g"
     speed, accuracy = speed_and_accuracy(f, a, b, trapeze, sub, expect)
@@ -183,15 +184,15 @@ def compare_integrate():
     ax1.plot(sub, speed, c, label="simpson method")
     ax2.plot(sub, accuracy, c, label="simpson method")
     
-    # c = "o"
-    # speed, accuracy = speed_and_accuracy(f, a, b, gauss, sub, expect)
-    # ax1.plot(sub, speed, c, label="gauss method")
-    # ax2.plot(sub, accuracy, c, label="gauss method")
+    c = "o"
+    speed, accuracy = speed_and_accuracy(f, a, b, gauss, sub, expect)
+    ax1.plot(sub, speed, c, label="gauss method")
+    ax2.plot(sub, accuracy, c, label="gauss method")
     
-    # c = "v"
-    # speed, accuracy = speed_and_accuracy(f, a, b, romberg, sub, expect)
-    # ax1.plot(sub, speed, c, label="romberg method")
-    # ax2.plot(sub, accuracy, c, label="romberg method")
+    c = "v"
+    speed, accuracy = speed_and_accuracy(f, a, b, romberg, sub, expect)
+    ax1.plot(sub, speed, c, label="romberg method")
+    ax2.plot(sub, accuracy, c, label="romberg method")
     
     plt.legend()
     plt.show()
