@@ -8,9 +8,9 @@ import numpy as np
 # Taken from Numerical recipes
 # Adapted in our situation, where function's ends are like a line
 def spline(x, y):
-    n = len(x)-1
-    u = np.empty(n)
-    y2 = np.empty(n+1)
+    n = len(x)
+    u = np.zeros(n)
+    y2 = np.empty(n)
     
     y2[0] = 0.
     u[0] = 0.
@@ -24,9 +24,9 @@ def spline(x, y):
     qn = 0.
     un = 0.
 
-    y2[n] = (un - qn * u[n-1]) / (qn * y2[n-1] + 1.)
-
-    for k in range(n-1, 1, -1):
+    y2[n-1] = (un - qn * u[n-1]) / (qn * y2[n-2] + 1.)
+    
+    for k in range(n-2, -1, -1):
         y2[k] = y2[k] * y2[k+1] + u[k]
     
     return y2
@@ -39,8 +39,8 @@ def splint(xa, ya, y2a, x):
     klo = 0
     khi = n-1
     
-    while (khi-klo > 1) :
-        k=int((khi+klo) / 2)
+    while (khi - klo > 1) :
+        k = (khi + klo) // 2
         if(xa[k] > x):
             khi = k
         else:
@@ -52,7 +52,7 @@ def splint(xa, ya, y2a, x):
 
     a = (xa[khi] - x) / h
     b = (x - xa[klo]) / h
-    y = a * ya[klo] + b * ya[khi] + ((a**3 - a) * y2a[klo] + (b**3 - b) * y2a[khi]) * (h**2) / 6.
+    y = a * ya[klo] + b * ya[khi] + (((a*a*a - a) * y2a[klo] + (b*b*b - b) * y2a[khi]) * (h*h) / 6.)
 
     return y
 
@@ -62,6 +62,6 @@ def apply_spline(xa, ya):
     y2a = spline(xa, ya)
     return lambda x : splint(xa, ya, y2a, x)
 
+
 def derivate(f, h):
     return lambda x : (f(x+h) - f(x)) / h
-    

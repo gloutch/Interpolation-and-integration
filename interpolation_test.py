@@ -20,21 +20,21 @@ def display_interpolation(file):
     print("===> Interpolation test for ", file, " <===")
     (ex,ey,ix,iy) = load_foil(file)
     
-    nbpoints = 300
+    nbpoints = 1200
     
     extrados = apply_spline(ex, ey) 
     pas = (ex[len(ex)-1] - ex[0]) / nbpoints
     x1 = np.arange(ex[0], ex[len(ex)-1], pas)
-    y1 = []
+    y1 = np.empty(nbpoints)
     for i in range(nbpoints):
-        y1.append(extrados(x1[i]))
+        y1[i] = extrados(x1[i])
 
     intrados = apply_spline(ix, iy) 
     pas = (ix[len(ix)-1] - ix[0]) / nbpoints
     x2 = np.arange(ix[0], ix[len(ix)-1], pas)
-    y2 = []
+    y2 = np.empty(nbpoints)
     for i in range(nbpoints):
-        y2.append(intrados(x2[i]))
+        y2[i] = intrados(x2[i])
         
 
     plt.plot([0, 1], [0, 0], color='black')
@@ -77,16 +77,16 @@ def test_wing():
     extrados = apply_spline(ex, ey) 
     pas = (ex[len(ex)-1] - ex[0]) / nbpoints
     x1 = np.arange(ex[0], ex[len(ex)-1], pas)
-    y1 = []
+    y1 = np.empty(nbpoints)
     for i in range(nbpoints):
-        y1.append(extrados(x1[i]))
+        y1[i] = extrados(x1[i])
 
     intrados = apply_spline(ix, iy) 
     pas = (ix[len(ix)-1] - ix[0]) / nbpoints
     x2 = np.arange(ix[0], ix[len(ix)-1], pas)
-    y2 = []
+    y2 = np.empty(nbpoints)
     for i in range(nbpoints):
-        y2.append(intrados(x2[i]))
+        y2[i] = intrados(x2[i])
         
     plt.plot(x1, y1, "r")
     plt.plot(x2, y2, "r")
@@ -112,5 +112,4 @@ def test_wing():
     plt.plot(x2, y2, "b")
 	"""
     plt.show()
-    
 #test_wing()
