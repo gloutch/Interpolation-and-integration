@@ -6,18 +6,14 @@ import numpy as np
 
 # Compute and obtain second derivative on each point of the set
 # Taken from Numerical recipes
-def spline(x, y, yp1, ypn):
-    max = .99e30
+# Adapted in our situation, where function's ends are like a line
+def spline(x, y):
     n = len(x)-1
-    u = np.zeros(n)
-    y2 = np.zeros(n+1)
+    u = np.empty(n)
+    y2 = np.empty(n+1)
     
-    if(yp1 > max):
-        y2[0] = 0.
-        u[0] = 0.
-    else:
-        y2[0] = -0.5
-        u[0] = (3. / (x[1] - x[0])) * ((y[1] - y[0]) / (x[1] - x[0]) - yp1)
+    y2[0] = 0.
+    u[0] = 0.
     
     for i in range(1, n-1):
         sig = (x[i] - x[i-1]) / (x[i+1] - x[i-1])
@@ -25,13 +21,9 @@ def spline(x, y, yp1, ypn):
         y2[i] = (sig - 1.) / p
         u[i] = (6. * ((y[i+1] - y[i]) / (x[i+1] - x[i]) - (y[i] - y[i-1]) / (x[i] - x[i-1])) / (x[i+1] - x[i-1]) - sig*u[i-1]) / p
     
-    if (ypn > max):
-        qn = 0.
-        un = 0.
-    else:
-        qn = 0.5
-        un = (3. / (x[n] - x[n-1])) * (ypn - (y[n] - y[n-1]) / (x[n] - x[n-1]))
-    
+    qn = 0.
+    un = 0.
+
     y2[n] = (un - qn * u[n-1]) / (qn * y2[n-1] + 1.)
 
     for k in range(n-1, 1, -1):
@@ -42,9 +34,11 @@ def spline(x, y, yp1, ypn):
 
 # Calculate the cubic-spline interpolated value of a given x
 # Taken from Numerical recipes
-def splint(xa, ya, y2a, n, x):
+def splint(xa, ya, y2a, x):
+    n = len(xa)
     klo = 0
     khi = n-1
+    
     while (khi-klo > 1) :
         k=int((khi+klo) / 2)
         if(xa[k] > x):
@@ -53,7 +47,6 @@ def splint(xa, ya, y2a, n, x):
             klo = k
 
     h = xa[khi] - xa[klo]
-
     if(h == 0.):
         raise Exception("Error", "bad xa input in splint")
 
@@ -66,10 +59,8 @@ def splint(xa, ya, y2a, n, x):
 
 # Calculate the interpolation of the airfoil
 def apply_spline(xa, ya):
-    n = len(xa)
-    yp1 = 1e30
-    ypn = 1e30    
-    return lambda x : splint(xa, ya, spline(xa, ya, yp1, ypn), len(xa), x)
+    y2a = spline(xa, ya)
+    return lambda x : splint(xa, ya, y2a, x)
 
 def derivate(f, h):
     return lambda x : (f(x+h) - f(x)) / h

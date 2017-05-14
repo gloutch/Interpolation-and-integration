@@ -5,11 +5,11 @@
 # coding: utf-8
 
 import numpy as np
-import matplotlib.pyplot as plt
-import interpolation as int
+from interpolation import apply_spline
 from airflow import *
 from Open import *
 from integration import *
+
 
 def pressure_to_speed(file, epsilon):
     (ex, ey, ix, iy) = load_foil(file)
@@ -17,8 +17,8 @@ def pressure_to_speed(file, epsilon):
     hmin = np.min(iy)
     hmax = np.max(ey)
     
-    intrados = int.apply_spline(ix, iy)
-    extrados = int.apply_spline(ex, ey)
+    intrados = apply_spline(ix, iy)
+    extrados = apply_spline(ex, ey)
     
     nbpoints = np.int((ex[len(ex)-1] - ex[0]) / epsilon)
 
@@ -39,14 +39,12 @@ def pressure_to_speed(file, epsilon):
           
     for i in range(le):
         for j in range(nbpoints):
-            M[nbpoints//2 - round(flow_extrados[i](j/nbpoints)*nbpoints, 0)][j] = pressure_speed_extrados[i]   
+            k = np.int(nbpoints//2 - round(flow_extrados[i](j/nbpoints)*nbpoints, 0))
+            M[k][j] = pressure_speed_extrados[i]   
             
     for i in range(li):
         for j in range(nbpoints):
-            M[nbpoints//2 - round(flow_intrados[i](j/nbpoints)*nbpoints, 0)][j] = pressure_speed_intrados[i] 
-            
-    fig = plt.figure(5)
-    ax = plt.subplot(111)
-    im = ax.imshow(M, cmap=plt.get_cmap('hot'), interpolation='gaussian')#'nearest')
-    fig.colorbar(im)
-    plt.show()
+            k = np.int(nbpoints//2 - round(flow_intrados[i](j/nbpoints)*nbpoints, 0)) 
+            M[k][j] = pressure_speed_intrados[i]
+
+    return M
