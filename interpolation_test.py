@@ -1,17 +1,9 @@
-import sys
-sys.path.append('C:\\Users\\Elfen\\Desktop\\Projet\\Interpolation-and-integration')
-
 ## Interpolation tests ##
 # coding: utf-8
 
 from interpolation import *
 import matplotlib.pyplot as plt
 from Open import *
-    
-file1 = "model/boe103.txt"
-file2 = "model/HOR20.txt"
-file3 = "model/DU84132V.txt"
-
 
 def display_interpolation(file):
     print("#####################")
@@ -49,5 +41,4 @@ def display_interpolation(file):
 
     plt.title("Interpolated points of " + file)
     plt.show()
-file1 = "C:\\Users\\Elfen\\Desktop\\Projet\\Interpolation-and-integration\\model\\boe103.txt"
-display_interpolation(file1)
+

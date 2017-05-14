@@ -1,6 +1,3 @@
-import sys
-sys.path.append('C:\\Users\\Elfen\\Desktop\\Projet\\Interpolation-and-integration')
-
 ## Model airflow ##
 # coding: utf-8
 

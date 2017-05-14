@@ -3,7 +3,6 @@
 
 import numpy as np
 
-
 # Compute and obtain second derivative on each point of the set
 # Taken from Numerical recipes
 # Adapted in our situation, where function's ends are like a line

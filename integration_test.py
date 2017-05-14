@@ -1,6 +1,3 @@
-import sys
-sys.path.append('C:\\Users\\Elfen\\Desktop\\Projet\\Interpolation-and-integration')
-
 ## Integration tests ##
 # coding: utf-8
 import matplotlib.pyplot as plt
@@ -35,8 +32,6 @@ def test_methode():
     romb = romberg(f, a, b)
     print("Romberg method : "+str(romb))
     print()
-test_methode()
-
 
 def test_integrate():
     print("###################")
@@ -58,7 +53,6 @@ def test_integrate():
     romb = integrate(X3, a, b, n, romberg)
     print("Romberg method : "+str(romb))
     print()
-test_integrate()
 
 def test_derivative():
     print("###################")
@@ -105,7 +99,6 @@ def test_derivative():
     
     plt.show()
     print()
-test_derivative()
 
 def test_length_curves():
     print("###################")
@@ -136,7 +129,6 @@ def test_length_curves():
     t_romb = time() - t5
     print("Romberg method : "+str(romb)+" in "+str(t_romb)+" seconds")
     print()
-test_length_curves()
     
 # auxiliary function to compare integration method
 def speed_and_accuracy(func, a, b, method, subdivision, expect):
@@ -199,4 +191,4 @@ def compare_integrate():
     
     plt.legend()
     plt.show()
-compare_integrate()
+

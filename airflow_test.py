@@ -1,6 +1,3 @@
-import sys
-sys.path.append('C:\\Users\\Elfen\\Desktop\\Projet\\Interpolation-and-integration')
-
 ## Model airflow tests ##
 # coding: utf-8
 
@@ -58,7 +55,3 @@ def create_airflow_map(file):
 
     plt.title("Airflow map")
     plt.show()
-    
-file = "model/boe103.txt"
-file = "C:\\Users\\Elfen\\Desktop\\Projet\\Interpolation-and-integration\\model\\boe103.txt"
-create_airflow_map(file)
