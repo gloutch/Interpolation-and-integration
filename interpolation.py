@@ -31,7 +31,6 @@ def spline(x, y):
     
     return y2
 
-
 # Calculate the cubic-spline interpolated value of a given x
 # Taken from Numerical recipes
 def splint(xa, ya, y2a, x):
@@ -56,12 +55,8 @@ def splint(xa, ya, y2a, x):
 
     return y
 
-
 # Calculate the interpolation of the airfoil
 def apply_spline(xa, ya):
     y2a = spline(xa, ya)
     return lambda x : splint(xa, ya, y2a, x)
 
-
-def derivate(f, h):
-    return lambda x : (f(x+h) - f(x)) / h

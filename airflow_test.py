@@ -1,5 +1,5 @@
-# import sys
-# sys.path.append('C:\\Users\\Elfen\\Desktop\\Algonum5\\Interpolation-and-integration')
+import sys
+sys.path.append('C:\\Users\\Elfen\\Desktop\\Projet\\Interpolation-and-integration')
 
 ## Model airflow tests ##
 # coding: utf-8
@@ -60,5 +60,5 @@ def create_airflow_map(file):
     plt.show()
     
 file = "model/boe103.txt"
-# file = "C:\\Users\\Elfen\\Desktop\\Algonum5\\Interpolation-and-integration\\boe103.txt"
+file = "C:\\Users\\Elfen\\Desktop\\Projet\\Interpolation-and-integration\\model\\boe103.txt"
 create_airflow_map(file)

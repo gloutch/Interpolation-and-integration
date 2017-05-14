@@ -1,5 +1,5 @@
-# import sys
-# sys.path.append('C:\\Users\\Elfen\\Desktop\\Algonum5\\Interpolation-and-integration')
+import sys
+sys.path.append('C:\\Users\\Elfen\\Desktop\\Projet\\Interpolation-and-integration')
 
 ## Pressure map test ##
 # coding: utf-8
@@ -12,7 +12,7 @@ def create_pressure_map(file):
     print("#   Pressure map    #")
     print("#####################")
     print("===> Colored pressure map for boe103.dat <===")
-    eps = 0.5*10**(-2)
+    eps = 10**(-3)
     #eps = 0.01
     M = pressure_to_speed(file, eps)
 
@@ -24,6 +24,6 @@ def create_pressure_map(file):
 
         
 file = "model/boe103.txt"
-# file = "C:\\Users\\Elfen\\Desktop\\Algonum5\\Interpolation-and-integration\\boe103.txt"
+file = "C:\\Users\\Elfen\\Desktop\\Projet\\Interpolation-and-integration\\model\\boe103.txt"
 create_pressure_map(file)
 

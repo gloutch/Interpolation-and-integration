@@ -1,5 +1,5 @@
 import sys
-sys.path.append('C:\\Users\\Elfen\\Desktop\\Algonum5\\Interpolation-and-integration')
+sys.path.append('C:\\Users\\Elfen\\Desktop\\Projet\\Interpolation-and-integration')
 
 import numpy as np;
 import re; # regexp

@@ -1,3 +1,6 @@
+import sys
+sys.path.append('C:\\Users\\Elfen\\Desktop\\Projet\\Interpolation-and-integration')
+
 ## Integration tests ##
 # coding: utf-8
 import matplotlib.pyplot as plt
