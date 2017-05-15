@@ -6,11 +6,6 @@ from airflow_test import *
 from integration_test import *
 from pressure_map_test import *
 
-def callback():
-    if askyesno('Avertissement','Etes vous sur de vouloir fermer le programme?'):
-        showwarning('Yes','Fermeture du programme')
-        fen.destroy()
-            
 def test_1():  
     file = v.get()
     display_interpolation(file)
