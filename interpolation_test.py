@@ -3,6 +3,7 @@
 
 from interpolation import *
 import matplotlib.pyplot as plt
+import math
 from Open import *
 
 def display_interpolation(file):
@@ -40,5 +41,105 @@ def display_interpolation(file):
     plt.plot(ix, iy, "b--") 
 
     plt.title("Interpolated points of " + file)
+    plt.show()
+
+def convergence_interpolation():
+    f = lambda x: ((1 + x)**3) * ((1 - x)**3) * math.cos(x)
+    nbpoints = 10
+    
+    fig = plt.figure()
+    f1 = fig.add_subplot(121)
+    x = np.arange(-1, 1 + 2/nbpoints, 2/nbpoints)
+    y = np.empty (nbpoints + 1)
+    for i in range(nbpoints + 1):
+        y[i] = f(x[i])
+    f1.plot(x, y, "bo")
+    
+    nbpoints = 1000
+    interpolation = apply_spline(x, y) 
+    x = np.arange(-1, 1 + 2/nbpoints, 2/nbpoints)
+    y = np.empty(nbpoints + 1)
+    for i in range(nbpoints + 1):
+        y[i] = interpolation(x[i])
+    f1.plot(x, y, "r")
+    plt.title('Interpolation')
+    
+    error = []
+    N = []
+    nbpoints = 2
+    n = 1000
+    
+    for i in range(7):
+        N.append(nbpoints)
+        x = np.arange(-1, 1 + 2/nbpoints, 2/nbpoints)
+        y = np.empty (nbpoints + 1)
+        for i in range(nbpoints + 1):
+            y[i] = f(x[i])
+        interpolation = apply_spline(x, y)
+        x = []
+        y = []
+        for i in range(n):
+            x.append(interpolation(i * 1/n) - f(i * 1/n))
+            y.append(f(i * 1/n))
+        error.append(np.linalg.norm(x) / np.linalg.norm(y))
+        nbpoints = nbpoints * 2
+        
+    f2 = fig.add_subplot(122) 
+    f2.set_yscale('log')
+    f2.plot(N, error, "g")
+    plt.title('Error')
+    
+    plt.show()
+  
+def derivate(f, h, x):
+    return (f(x + h) - f(x)) / h
+    
+def test_C2():
+    f = lambda x: ((1 + x)**3) * ((1 - x)**3) * math.cos(x)
+    
+    fig = plt.figure()
+    f1 = fig.add_subplot(221)
+    nbpoints = 1000
+    x = np.arange(-1, 1 + 2/nbpoints, 2/nbpoints)
+    y = np.empty(nbpoints + 1)
+    for i in range(nbpoints + 1):
+        y[i] = f(x[i])
+    f1.plot(x, y, "b")
+    plt.title('(1+x)**3 * (1-x)**3 * cos(x)')
+    
+    f2 = fig.add_subplot(222)
+    nbpoints = 10
+    x = np.arange(-1, 1 + 2/nbpoints, 2/nbpoints)
+    y = np.empty (nbpoints + 1)
+    for i in range(nbpoints + 1):
+        y[i] = f(x[i])
+    f2.plot(x, y, "bo")
+    plt.title('Interpolation')
+    
+    nbpoints = 1000
+    interpolation = apply_spline(x, y) 
+    x = np.arange(-1, 1 + 2/nbpoints, 2/nbpoints)
+    y = np.empty(nbpoints + 1)
+    for i in range(nbpoints + 1):
+        y[i] = interpolation(x[i])
+    f2.plot(x, y, "r")
+    
+    f3 = fig.add_subplot(223)
+    h = 10**(-6)
+    y = np.empty(nbpoints + 1)
+    C1 = lambda x : derivate(interpolation, h, x)
+    for i in range(nbpoints + 1):
+        y[i] = C1(x[i])
+    f3.plot(x, y, "g")
+    plt.title('C1')
+    
+    f4 = fig.add_subplot(224)
+    h = 10**(-6)
+    y = np.empty(nbpoints + 1)
+    C2 = lambda x : derivate(C1, h, x)
+    for i in range(nbpoints + 1):
+        y[i] = C2(x[i])
+    f4.plot(x, y, "purple")
+    plt.title('C2')
     plt.show()
 

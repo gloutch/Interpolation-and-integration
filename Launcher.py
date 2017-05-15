@@ -9,6 +9,7 @@ from pressure_map_test import *
 def test_1():  
     file = v.get()
     display_interpolation(file)
+    convergence_interpolation()
  
 def test_2(): 
     file = v.get()
