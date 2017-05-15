@@ -11,7 +11,7 @@ def create_airflow_map(file):
     print("#####################")
     print("#   Airflow model   #")
     print("#####################")
-    print("===> Laminar flowing for boe103.dat <===")
+    print("===> Laminar flowing for " + file + " <===")
     (ex, ey, ix, iy) = load_foil(file)
     
     hmin = np.min(iy)

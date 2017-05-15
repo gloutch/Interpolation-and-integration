@@ -8,8 +8,9 @@ def create_pressure_map(file):
     print("#####################")
     print("#   Pressure map    #")
     print("#####################")
-    print("===> Colored pressure map for boe103.dat <===")
+    print("===> Colored pressure map for " + file + " <===")
     eps = 10**(-3)
+    
     M = pressure_to_speed(file, eps)
 
     fig = plt.figure(5)

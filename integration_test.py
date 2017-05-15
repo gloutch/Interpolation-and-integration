@@ -149,7 +149,7 @@ def compare_integrate():
     global f
     fig = plt.figure()
 
-    #f = f
+    
     a = 0.
     b = 4.
     sub = range(9, 80, 2)
@@ -158,11 +158,12 @@ def compare_integrate():
     ax1 = fig.add_subplot(211)
     ax2 = fig.add_subplot(212)
     ax1.set_ylabel("Execution time")
-    ax1.set_xlabel("Iterations")
-    ax1.set_yscale('log')
+    ax1.set_xlabel("Number of subdivisions")
+    # ax1.set_yscale('log')
+    
     ax2.set_ylabel("Relative error")
-    ax2.set_xlabel("Iterations")
-    ax2.set_yscale('log')
+    ax2.set_xlabel("Number of subdivisions")
+    # ax2.set_yscale('log')
 
     c = "g"
     speed, accuracy = speed_and_accuracy(f, a, b, trapeze, sub, expect)
